@@ -27,7 +27,7 @@ loop do
     when /Message/
     	response = "This is the message of the day"
     when /Poem/
-    	response = The_Raven.gsub("\n", "")
+    	response = The_Raven.gsub("\n", " ")
     else
     	response = "Time to sleep"   #string, containing reply to client 
     end
