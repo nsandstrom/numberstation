@@ -2,6 +2,15 @@ require "net/http"
 
 
 LOCAL_IP = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
+
+The_Raven = "Once upon a midnight dreary, while I pondered, weak and weary,
+Over many a quaint and curious volume of forgotten lore—
+    While I nodded, nearly napping, suddenly there came a tapping,
+As of some one gently rapping, rapping at my chamber door.
+Tis some visitor, I muttered, tapping at my chamber door—
+            Only this and nothing more."
+
+
 server = TCPServer.new(LOCAL_IP, 34444)
 puts "I'm now running on #{LOCAL_IP}."
 
@@ -17,6 +26,8 @@ loop do
     case request
     when /Message/
     	response = "This is the message of the day"
+    when /Poem/
+    	response = The_Raven.gsub("\n", "")
     else
     	response = "Time to sleep"   #string, containing reply to client 
     end
