@@ -27,7 +27,7 @@ def tryServer(request)
 end
 
 
-if (h=tryServer("Poem")) == "none" then
+if (h=tryServer("Message")) == "none" then
 	say "Starting random number sequence"
 	dumbMode
 	sleep 2

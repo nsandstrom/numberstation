@@ -25,7 +25,7 @@ loop do
 
     case request
     when /Message/
-    	response = "This is the message of the day"
+    	response = "Butsex"
     when /Poem/
     	response = The_Raven.gsub("\n", " ")
     else
