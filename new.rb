@@ -37,17 +37,15 @@ elsif ARGV.include? "-m"
 elsif ARGV.include? "-p"
 	text = "Poem"
 else
-	text = ""
+	dumbMode
 end
 
 begin
 	if (h=tryServer(text)) == "none" then
 		say text.to_s
 		#dumbMode
-		sleep 2
 	else
 		say h.to_s
-		sleep 2
 		#puts say "this works"
 		#sleep 1
 	end
