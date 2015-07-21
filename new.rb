@@ -21,21 +21,36 @@ def dumbMode
 end
 
 def tryServer(request)
-	x = Net::HTTP.get(URI.parse("http://192.168.1.23:34444/#{request}"))
-	x
-	#"none"
+	begin
+		x = Net::HTTP.get(URI.parse("http://192.168.1.23:34444/#{request}"))
+		x
+	rescue
+		"none"
+	end
 end
 
-
-if (h=tryServer("Message")) == "none" then
-	say "Starting random number sequence"
-	dumbMode
-	sleep 2
+if ARGV.include? "-t" then
+    text = ARGV[ARGV.index("-t")+1..ARGV.size].join(" ")
+    puts text
+elsif ARGV.include? "-m"
+	text = "Message"
+elsif ARGV.include? "-p"
+	text = "Poem"
 else
-	
+	text = ""
+end
 
-	say h.to_s
-	sleep 2
-	#puts say "this works"
-	#sleep 1
+begin
+	if (h=tryServer(text)) == "none" then
+		say text.to_s
+		#dumbMode
+		sleep 2
+	else
+		say h.to_s
+		sleep 2
+		#puts say "this works"
+		#sleep 1
+	end
+#rescue
+#	dumbMode
 end

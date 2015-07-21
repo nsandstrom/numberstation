@@ -29,7 +29,7 @@ loop do
     when /Poem/
     	response = The_Raven.gsub("\n", " ")
     else
-    	response = "Time to sleep"   #string, containing reply to client 
+    	response = "none"   #string, containing reply to client 
     end
      
      
