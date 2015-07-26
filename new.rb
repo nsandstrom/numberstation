@@ -3,10 +3,20 @@ require_relative 'functions.rb'
 #load 'fembot.txt'
 
 
+if ARGV.include? "-t" then
 
-Target = :chromebook
+    case ARGV[ARGV.index("-t")+1]
+    when "laptop", "chromebook"
+    	puts "target will be chromebook"
+    	Target = :chromebook
+    else
+    	Target = :other
+    end
+else
+	Target = :rpi
+end
 
-if Target != :chromebook
+if Target == :rpi
 	puts "will require Pi Piper"
 	require 'pi_piper'
 else
@@ -15,7 +25,7 @@ else
 end
 
 
-if ARGV.include? "-t" then
+if ARGV.include? "-c" then
     text = ARGV[ARGV.index("-t")+1..ARGV.size].join(" ")
     puts text
 elsif ARGV.include? "-m"
