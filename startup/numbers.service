@@ -1,0 +1,15 @@
+[Unit]
+Description=Start Numberstation script
+#After=syslog.target network.target send.service syslog.service
+#After=send.service
+
+[Service]
+WorkingDirectory=/home/pi/dev/bbr/numberstation/
+ExecStart= /usr/bin/numbers.sh
+SyslogIdentifier=Numberstation
+Restart=on-failure
+RestartSec=5
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
