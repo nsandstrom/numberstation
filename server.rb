@@ -29,7 +29,7 @@ loop do
     when /Poem/
     	response = The_Raven.gsub("\n", " ")
     else
-    	response = "none"   #string, containing reply to client 
+    	response = {"message" =>"none", "type" => "Test"}  #string, containing reply to client 
     end
      
      

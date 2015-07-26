@@ -1,16 +1,19 @@
 require "net/http"
+require 'pi_piper'
+require_relative 'constants.rb'
 #load 'fembot.txt'
 
-Fembot = "espeak -ven+m2 -k5 -s120 -g0 -a200 -p10  --stdout | play -t wav - \\
-overdrive 2 \\
-flanger 10 2 0 71 1 sin 25 lin \\
-echo 0.8 0.7 12 0.7 \\
-echo 0.8 0.8 5 0.7 \\
-echo 0.8 0.7 6 0.7 \\
-gain 8 "
+
 
 def say (text)
+	pid = fork do
+		blink
+	end
 	`echo #{text} | #{Fembot}`
+	if Target == "chromebook"
+		brightness 900
+	end
+	Process.kill("KILL", pid)
 end
 
 def dumbMode
@@ -18,6 +21,24 @@ def dumbMode
 		say (rand*1000).to_i.to_s
 		sleep 1.5
 	end
+end
+
+def blink
+	while true
+		sleep Blink_period/2
+		if Target == "chromebook"
+			brightness 500
+		end
+		sleep Blink_period/2
+		if Target == "chromebook"
+			brightness 900
+		end
+	end
+end
+
+def brightness(brightness)
+	cmd = "echo \"#{brightness}\">/sys/class/backlight/intel_backlight/brightness"
+	system( cmd )
 end
 
 def tryServer(request)
@@ -28,6 +49,8 @@ def tryServer(request)
 		"none"
 	end
 end
+
+Target = "chromebook"
 
 if ARGV.include? "-t" then
     text = ARGV[ARGV.index("-t")+1..ARGV.size].join(" ")
@@ -49,6 +72,6 @@ begin
 		#puts say "this works"
 		#sleep 1
 	end
-#rescue
-#	dumbMode
+rescue
+	dumbMode
 end
