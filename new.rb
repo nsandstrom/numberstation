@@ -18,6 +18,8 @@ end
 
 if Target == :rpi
 	puts "will require Pi Piper"
+	$redled = PiPiper::Pin.new(:pin => 4, :direction => :out)
+	$greenled = PiPiper::Pin.new(:pin => 3, :direction => :out)
 	require 'pi_piper'
 else
 	puts "will NOT require Pi Piper"
