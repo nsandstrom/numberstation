@@ -30,7 +30,8 @@ trap("INT"){
 def endProgram
 	puts "Shutting down."
 	if Target == :rpi
-		PiPiper.pin_release(4)
+		`echo 3 > /sys/class/gpio/unexport`
+		`echo 4	> /sys/class/gpio/unexport`
 	elsif Target == :chromebook
 			brightness 900
 	end
