@@ -30,7 +30,7 @@ def blink
 		end
 		sleep Blink_period/2
 		if Target == :rpi
-			$redled.on
+			$redled.off
 		elsif Target == :chromebook
 			brightness 900
 		end
