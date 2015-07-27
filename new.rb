@@ -20,7 +20,7 @@ if Target == :rpi
 
 	puts "will require Pi Piper"
 	require 'pi_piper'
-	include PiPiper
+	#include PiPiper
 	$redled = PiPiper::Pin.new(:pin => 4, :direction => :out)
 	$greenled = PiPiper::Pin.new(:pin => 3, :direction => :out)
 
