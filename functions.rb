@@ -2,6 +2,7 @@ require "net/http"
 
 
 def say (text)
+
 	pid = fork do
 		blink
 	end
@@ -12,14 +13,30 @@ def say (text)
 		brightness 900
 	end
 	Process.kill("KILL", pid)
+
 end
 
 def dumbMode
 	while true
 		say (rand*1000).to_i.to_s
-		sleep 1.5
+		sleep 2.5
 	end
 end
+
+trap("INT"){
+	endProgram
+}
+
+def endProgram
+	puts "Shutting down."
+	if Target == :rpi
+		PiPiper.pin_release(4)
+	elsif Target == :chromebook
+			brightness 900
+	end
+	exit
+end
+
 
 def blink
 	while true

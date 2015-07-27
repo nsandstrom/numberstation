@@ -29,7 +29,7 @@ else
 
 end
 
-trap("INT") { puts "Shutting down."; exit}
+
 
 
 if ARGV.include? "-c" then
