@@ -29,6 +29,8 @@ else
 
 end
 
+trap("INT") { puts "Shutting down."; exit}
+
 
 if ARGV.include? "-c" then
     text = ARGV[ARGV.index("-t")+1..ARGV.size].join(" ")
