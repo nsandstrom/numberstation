@@ -13,12 +13,21 @@ def say (text)
 		brightness 900
 	end
 	Process.kill("KILL", pid)
+	Process.detach(pid)
 
 end
 
 def dumbMode
+	messageCounter = 0
 	while true
-		say (rand*1000).to_i.to_s
+		if messageCounter <= 0 then
+			say DumbMessage[rand*DumbMessage.size]
+			puts "new counter: #{messageCounter = 6+((rand*4)+0.4).to_i}"
+		else
+			say (rand*1000).to_i.to_s
+		end
+		messageCounter -= 1
+		puts "count before sleep: #{messageCounter}"
 		sleep 2.5
 	end
 end

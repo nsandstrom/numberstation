@@ -1,4 +1,5 @@
 Blink_period = 0.4
+BlinkLED = 17
 
 Fembot = "espeak -ven+m2 -k5 -s120 -g0 -a200 -p10  --stdout | play -t wav - \\
 overdrive 2 \\
@@ -8,4 +9,7 @@ echo 0.8 0.8 5 0.7 \\
 echo 0.8 0.7 6 0.7 \\
 gain 8 "
 
-BlinkLED = 17
+DumbMessage = [	"I got no usefull data right now",
+				"This is all rubbish",
+				"I am just picking numbers randomly",
+				"My data uplink is broken"]
