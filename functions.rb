@@ -6,10 +6,12 @@ def say (text)
 	pid = fork do
 		blink
 	end
-	`echo #{text} | #{Fembot}`
+	
 	if Target == :rpi
+		sleep 1
 		$redled.off
 	elsif Target == :chromebook
+		`echo #{text} | #{Fembot}`
 		brightness 900
 	end
 	Process.kill("KILL", pid)
