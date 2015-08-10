@@ -16,7 +16,7 @@ else
 	Target = :rpi
 end
 
-if Target == :rpi2
+if Target == :rpi
 
 	puts "will require Pi Piper"
 	require 'pi_piper'
