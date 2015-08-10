@@ -9,7 +9,7 @@ def say (text)
 	
 	if Target == :rpi
 		`echo #{text} | #{Fembot}`
-		#$redled.off
+		$redled.off
 	elsif Target == :chromebook
 		`echo #{text} | #{Fembot}`
 		brightness 900
@@ -53,13 +53,13 @@ end
 def blink
 	while true
 		if Target == :rpi
-			#$redled.on
+			$redled.on
 		elsif Target == :chromebook
 			brightness 500
 		end
 		sleep Blink_period/2
 		if Target == :rpi
-			#$redled.off
+			$redled.off
 		elsif Target == :chromebook
 			brightness 900
 		end
