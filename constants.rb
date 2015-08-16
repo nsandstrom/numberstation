@@ -13,3 +13,14 @@ DumbMessage = [	"I got no usefull data right now",
 				"This is all rubbish",
 				"I am just picking numbers randomly",
 				"My data uplink is broken"]
+
+
+
+
+
+The_Raven = "Once upon a midnight dreary, while I pondered, weak and weary,
+			Over many a quaint and curious volume of forgotten lore—
+			While I nodded, nearly napping, suddenly there came a tapping,
+			As of some one gently rapping, rapping at my chamber door.
+			Tis some visitor, I muttered, tapping at my chamber door—
+			Only this and nothing more."

@@ -42,18 +42,29 @@ elsif ARGV.include? "-m"
 elsif ARGV.include? "-p"
 	text = "Poem"
 else
-	dumbMode
+	#dumbMode
+	text = "Message"
 end
-
-begin
-	if (h=tryServer(text)) == "none" then
-		say text.to_s
-		#dumbMode
-	else
-		say h.to_s
-		#puts say "this works"
-		#sleep 1
+while true
+	begin
+		if (h=tryServer(text)) == "none" then
+			say text.to_s
+			#dumbMode
+		else
+			puts "got #{h} back from server"
+			case h["type"]
+			when "crypto"
+				cryptoMode h["message"], h["option"]
+			when "dumbMode"
+				dumbMode
+			when "phonetic"
+				say_phonetic h["message"]
+			end
+			#puts say "this works"
+			#sleep 1
+		end
+	#rescue
+	#	dumbMode
 	end
-rescue
-	dumbMode
+	sleep 10
 end

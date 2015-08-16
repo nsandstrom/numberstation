@@ -1,4 +1,6 @@
 require "net/http"
+require 'json'
+require 'phonetic_alphabet'
 
 
 def say (text)
@@ -16,23 +18,50 @@ def say (text)
 	end
 	Process.kill("KILL", pid)
 	Process.detach(pid)
+	puts "end of say"
+end
 
+def say_phonetic word
+	word.to_p.split(/ /).each do |character|
+		puts "will say #{character}"
+		if character == ""
+			#say "space"
+			sleep 2
+		else
+			say character
+			sleep 1
+		end
+		puts "sleep now"
+		
+	end
 end
 
 def dumbMode
-	messageCounter = 0
-	while true
-		if messageCounter <= 0 then
-			say DumbMessage[rand*DumbMessage.size]
-			puts "new counter: #{messageCounter = 6+((rand*4)+0.4).to_i}"
-		else
+	say DumbMessage[rand*DumbMessage.size]
+	puts "new counter: #{messageCounter = 6+((rand*4)+0.4).to_i}"
+	messageCounter.times do
+		
+		
 			say (rand*1000).to_i.to_s
-		end
-		messageCounter -= 1
-		puts "count before sleep: #{messageCounter}"
+		
 		sleep 2.5
 	end
 end
+
+def cryptoMode message, offset
+	message.each_char do |c|
+		say (c.upcase.ord.to_i)-64+offset.to_i
+		sleep 2
+	end
+end
+
+def phonetic message
+	message.each_char do |c|
+		say c.to_p
+		sleep 2
+	end
+end
+
 
 trap("INT"){
 	endProgram
@@ -76,7 +105,8 @@ end
 def tryServer(request)
 	begin
 		x = Net::HTTP.get(URI.parse("http://192.168.1.23:34444/#{request}"))
-		x
+		puts x
+		JSON.parse(x)
 	rescue
 		"none"
 	end

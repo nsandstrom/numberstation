@@ -1,19 +1,23 @@
 require "net/http"
+require 'json'
+
 
 
 LOCAL_IP = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
 
-The_Raven = "Once upon a midnight dreary, while I pondered, weak and weary,
-Over many a quaint and curious volume of forgotten lore—
-    While I nodded, nearly napping, suddenly there came a tapping,
-As of some one gently rapping, rapping at my chamber door.
-Tis some visitor, I muttered, tapping at my chamber door—
-            Only this and nothing more."
+def readFile
+    arr = []
+    File.open("current.txt", 'r').each_line do |file|
+        arr << file.chomp
+    end
+    return {"type" => arr[0], "message" => arr[1], "option" => arr[2]}
+
+end
 
 
 server = TCPServer.new(LOCAL_IP, 34444)
 puts "I'm now running on #{LOCAL_IP}."
-
+#puts readFile
 loop do
 	socket = server.accept      #Socket. I/O subclass
     puts '======Got request!======'
@@ -31,16 +35,20 @@ loop do
     else
     	response = {"message" =>"none", "type" => "Test"}  #string, containing reply to client 
     end
+
+
+    response = readFile.to_json
      
      
     socket.print    "HTTP/1.1 200 OK\r\n" +
                     "Content-Type: text/plain\r\n" +
-                    "Content-length: #{response.bytesize}\r\n" +
+                    "Content-length: #{response.to_json.size}\r\n" +
                     "Connection: close\r\n"
                      
     socket.print    "\r\n"
      
     socket.print    response  
     socket.close  
+    puts "responded with #{response}"
 	
 end
