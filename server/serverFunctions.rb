@@ -9,17 +9,17 @@ end
 
 def writeConfig newConfig
 	matches = newConfig.match(/mode=(.*)&content=(.*)&time=(.*) /)
-	if matches[1]=="crypto" && !matches[3].to_i.integer?
-		return "fail must be number"
-	else
-		File.open("current.txt", 'w') do |file|
-			matches[1..3].each do |line|
-				file.puts line.gsub("+", " ")
-			end
-			
+
+	
+	File.open("current.txt", 'w') do |file|
+		matches[1..2].each do |line|
+			file.puts line.gsub("+", " ")
 		end
-		return "success"
+		file.puts matches[3].gsub("+", " ").to_i
+		
 	end
+	return "success"
+	
 end
 
 def replyToStation socket

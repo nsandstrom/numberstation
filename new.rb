@@ -48,7 +48,8 @@ end
 while true
 	begin
 		if (h=tryServer(text)) == "none" then
-			say text.to_s
+			#say text.to_s
+			say "no uplink"
 			#dumbMode
 		else
 			puts "got #{h} back from server"
@@ -59,6 +60,8 @@ while true
 				dumbMode
 			when "phonetic"
 				say_phonetic h["message"]
+			when "text"
+				#Do text here
 			end
 			#puts say "this works"
 			#sleep 1
