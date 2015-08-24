@@ -4,8 +4,12 @@ require_relative 'constants.rb'
 require_relative 'serverFunctions.rb'
 
 
+begin
+    LOCAL_IP = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
+rescue
+    LOCAL_IP = "31.192.231.98"
+end
 
-LOCAL_IP = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
 
 
 
