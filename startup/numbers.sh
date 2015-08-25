@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #/usr/bin/ruby /agab/rbDelay.rb
-amixer set PCM -- 1000 #max volume
+amixer set PCM -- -000 #max volume
 amixer cset numid=3 1 # force headphone (PWM) output
 echo delaying
 sleep 5

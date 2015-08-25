@@ -83,6 +83,7 @@ def buildForm
 "Current mode is #{currentMessage["type"]} with: #{currentMessage["message"]}<br>" +
 '<form action="reconfig.asp" method="get" target="_self">
 Mode: <select name="mode">
+<option value="off">Off</option>
 <option value="crypto">Crypto</option>
 <option value="phonetic">NATO phonetic alphabet</option>
 <option value="text">Plain text</option>

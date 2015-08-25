@@ -62,6 +62,12 @@ while true
 				say_phonetic h["message"]
 			when "text"
 				textMode h["message"]
+			when "off"
+				puts "I will remain silent!"
+				sleep 10
+			else
+				puts "don't know what to do"
+				sleep 10
 			end
 			#puts say "this works"
 			#sleep 1
