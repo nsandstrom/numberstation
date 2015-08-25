@@ -1,10 +1,13 @@
 def readConfig
-    arr = []
-    File.open("current.txt", 'r').each_line do |file|
-        arr << file.chomp
-    end
-    return {"type" => arr[0], "message" => arr[1], "option" => arr[2]}
-
+	begin
+	    arr = []
+	    File.open("current.txt", 'r').each_line do |file|
+	        arr << file.chomp
+	    end
+	    return {"type" => arr[0], "message" => arr[1], "option" => arr[2]}
+	rescue
+		return {"type" => "none", "message" => "no config file", "option" => "0"}
+	end
 end
 
 def writeConfig newConfig
