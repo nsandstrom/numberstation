@@ -75,5 +75,5 @@ while true
 	#rescue
 	#	dumbMode
 	end
-	sleep 10
+	sleep 20
 end
