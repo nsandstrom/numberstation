@@ -13,7 +13,7 @@ end
 
 
 
-server = TCPServer.new(LOCAL_IP, 34444)
+server = TCPServer.new(LOCAL_IP, 80)
 puts "I'm now running on #{LOCAL_IP}."
 #puts readFile
 loop do
