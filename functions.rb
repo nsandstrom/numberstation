@@ -4,6 +4,7 @@ require 'phonetic_alphabet'
 
 
 def say (text)
+	puts "Will say: #{text}"
 
 	pid = fork do
 		blink
@@ -50,9 +51,11 @@ end
 
 def cryptoMode message, offset
 	message.each_char do |c|
-		say (c.upcase.ord.to_i)-64+offset.to_i
+
+		say (c.gsub(" ", "@").gsub(".", "^").upcase.ord.to_i)-64+offset.to_i
 		sleep 2
 	end
+	say "Stop"
 end
 
 def phonetic message
@@ -61,6 +64,16 @@ def phonetic message
 		sleep 2
 	end
 end
+
+def textMode message
+	puts "will read whole text: #{message}"
+	message.split(".").each do |word|
+		say word
+		sleep 1
+	end
+
+end
+
 
 
 trap("INT"){
@@ -104,7 +117,7 @@ end
 
 def tryServer(request)
 	begin
-		x = Net::HTTP.get(URI.parse("http://192.168.1.23:34444/#{request}"))
+		x = Net::HTTP.get(URI.parse("http://192.168.1.203:34444/#{request}"))
 		puts x
 		JSON.parse(x)
 	rescue

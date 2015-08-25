@@ -12,9 +12,8 @@ def writeConfig newConfig
 
 	
 	File.open("current.txt", 'w') do |file|
-		matches[1..2].each do |line|
-			file.puts line.gsub("+", " ")
-		end
+		file.puts matches[1].gsub("+", " ")
+		file.puts matches[2].gsub("+", " ").gsub(/%[0-9a-zA-Z]{2}/, "")
 		file.puts matches[3].gsub("+", " ").to_i
 		
 	end
@@ -42,7 +41,7 @@ end
 def replyToWeb socket, request
 	begin
 	    if request.include? "reconfig.asp"
-	    	response = writeConfig request
+	    	response = buildReception(writeConfig(request))
 		else
 	    	puts "nay"
 	    	response = buildForm
@@ -61,7 +60,15 @@ def replyToWeb socket, request
 	end
 end
 
-
+def buildReception status
+return '<!DOCTYPE html>
+<html>
+<body>' + 
+status +
+'<br><a href="/">Back</a>
+</body>
+</html>'
+end
 
 def buildForm
 
@@ -73,11 +80,11 @@ def buildForm
 "Current mode is #{currentMessage["type"]} with: #{currentMessage["message"]}<br>" +
 '<form action="reconfig.asp" method="get" target="_self">
 Mode: <select name="mode">
-<option value="dumbMode">Dumb mode</option>
 <option value="crypto">Crypto</option>
 <option value="phonetic">NATO phonetic alphabet</option>
-<option value="wRandom">Weighted random</option>
 <option value="text">Plain text</option>
+<option value="dumbMode">Dumb mode</option>
+<option value="wRandom">Weighted random</option>
 </select><br>
   Content: <input type="text" name="content"><br>
   Option: <input type="text" name="time"><br>

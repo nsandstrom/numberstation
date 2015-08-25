@@ -61,7 +61,7 @@ while true
 			when "phonetic"
 				say_phonetic h["message"]
 			when "text"
-				#Do text here
+				textMode h["message"]
 			end
 			#puts say "this works"
 			#sleep 1
