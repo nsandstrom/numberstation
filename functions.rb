@@ -117,7 +117,7 @@ end
 
 def tryServer(request)
 	begin
-		x = Net::HTTP.get(URI.parse("http://192.168.1.203:34444/#{request}"))
+		x = Net::HTTP.get(URI.parse("http://31.192.231.98/#{request}"))
 		puts x
 		JSON.parse(x)
 	rescue
