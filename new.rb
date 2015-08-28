@@ -50,6 +50,7 @@ while true
 		if (h=tryServer(text)) == "none" then
 			#say text.to_s
 			say "no uplink"
+			sleep 50
 			#dumbMode
 		else
 			puts "got #{h} back from server"
